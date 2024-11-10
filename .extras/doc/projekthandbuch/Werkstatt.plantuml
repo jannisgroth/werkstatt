@@ -1,0 +1,63 @@
+
+@startuml Entity
+
+package typeorm {
+  class "@Entity" as Entity
+  hide Entity circle
+  class "@Column" as Column
+  hide Column circle
+  class "@PrimaryColumn" as PrimaryColumn
+  hide PrimaryColumn circle
+  class "@OneToMany" as OneToMany
+  hide OneToMany circle
+  class "@JoinColumn" as JoinColumn
+  hide JoinColumn circle
+  class "@ManyToOne" as ManyToOne
+  hide ManyToOne circle
+  class "@CreateDateColumn" as CreateDateColumn
+  hide CreateDateColumn circle
+  class "@UpdateDateColumn" as UpdateDateColumn
+  hide UpdateDateColumn circle
+}
+
+package werkstatt.entity {
+  class "type WerkstattArt = 'SCHREINEREI' | 'MALEREI' | 'ELEKTRIKR'" as WerkstattArt
+  hide WerkstattArt circle
+
+  class Werkstatt <<entity>> <<@Entity>> {
+    @Column() @PrimaryColumn() readonly id: number
+    @Column() readonly version: number
+    @Column() readonly werkstattname: string
+    @Column() readonly rating: number
+    @Column() readonly art: WerkstattArt
+    @Column() readonly homepage?: string
+    @Column() readonly schlagwoerter?: string
+    @CreateDateColumn() readonly erzeugt: Date
+    @UpdateDateColumn() readonly aktualisiert: Date
+  }
+
+  class Adresse <<entity>> <<@Entity>> {
+    @Column() @PrimaryColumn() readonly id: number
+    @Column() readonly postleitzahl: string
+    @Column() readonly strasse?: string
+    @Column() readonly hausnummer?: string
+  }
+
+  class Angestellter <<entity>> <<@Entity>> {
+    @Column() @PrimaryColumn() readonly id: number
+    @Column() readonly name: string
+    @Column() readonly position?: string
+  }
+
+  Werkstatt *--> "1" Adresse : @OneToOne() \ntitel
+  Werkstatt *--> "*" Angestellter : @OneToMany() \nabbildungen
+
+  Werkstatt .right.> Entity
+  Werkstatt .right.> WerkstattArt
+}
+
+hide empty members
+
+footer (c) Jannis Groth
+
+@enduml

@@ -1,0 +1,63 @@
+@startuml Controller-Klasse
+
+interface Promise<T>
+
+package @nestjs/graphql {
+  class "@Resolver" as Resolver
+  hide Resolver circle
+
+  class "@UseInterceptors" as UseInterceptors
+  hide UseInterceptors circle
+
+  class "@Query" as Query
+  hide Query circle
+
+  class "@Args" as Args
+  hide Args circle
+
+  Resolver .left[hidden].> Promise
+}
+
+package werkstatt {
+  package entity {
+    class Werkstatt <<entity>>
+  }
+
+  package service {
+    class WerkstattReadService << control >>
+  }
+
+  package graphql #DDDDDD {
+    class "type WerkstattDTO = Omit<Werkstatt, 'angestellte' | 'aktualisiert' | 'erzeugt'" as WerkstattDTO
+    hide WerkstattDTO circle
+
+    interface IdInput {
+        id: number
+    }
+
+    class WerkstattQueryResolver << control >> << @Resolver() >> << @UseInterceptors() >> {
+      + @Query() async Werkstatt(@Args() id: IdInput): Promise<WerkstattDTO>
+      + @Query() async werkstaette(@Args() titel: string | undefined): Promise<WerkstattDTO[]>
+    }
+
+    WerkstattQueryResolver o-up-> "1" WerkstattReadService : service
+    WerkstattQueryResolver ..> WerkstattDTO
+    WerkstattQueryResolver ..> IdInput
+    WerkstattDTO ..> Werkstatt
+    WerkstattQueryResolver ..> Resolver
+
+    WerkstattQueryResolver ..> Promise
+
+    WerkstattDTO .[hidden].> Werkstatt
+    Werkstatt .[hidden].> Promise
+    WerkstattReadService .[hidden].> Promise
+    Werkstatt .[hidden].> Resolver
+    WerkstattReadService .[hidden].> Resolver
+  }
+}
+
+hide empty members
+
+footer (c) Jannis Groth
+
+@enduml

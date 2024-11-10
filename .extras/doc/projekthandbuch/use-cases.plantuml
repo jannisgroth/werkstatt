@@ -1,0 +1,20 @@
+@startuml Use Cases
+
+actor Gast
+actor Admin
+actor Kunde
+
+rectangle werkstatt {
+    Gast --> (Werkstatt suchen)
+    Admin --> (Werkstatt suchen)
+    Admin --> (Werkstatt anlegen)
+    Admin --> (Werkstatt ändern)
+    Admin --> (Werkstatt löschen)
+    Kunde --> (Werkstatt suchen)
+    Kunde --> (Werkstatt anlegen)
+    Kunde --> (Werkstatt ändern)
+}
+
+footer (c) Jannis Groth
+
+@enduml

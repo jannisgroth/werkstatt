@@ -1,0 +1,59 @@
+@startuml Komponenten
+
+left to right direction
+
+actor RESTClient
+actor GraphQLClient
+
+node "Nest" {
+  [RequestLoggerMiddleware]
+
+  [WerkstattController]
+  [WerkstattResolver]
+
+  [WerkstattService]
+
+  [Repository<Werkstatt>]
+
+}
+
+
+cloud {
+    [TypeORM]
+}
+
+cloud {
+    [nest-keycloak-connect]
+}
+
+database "DB Werkstatt" {
+    [Tabelle werkstatt]
+    [Tabelle adresse]
+    [Tabelle angestellter]
+}
+
+node {
+    [Keycloak]
+}
+
+RESTClient ~~> [RequestLoggerMiddleware]
+GraphQLClient ~~> [RequestLoggerMiddleware]
+
+[RequestLoggerMiddleware] ~~> [WerkstattController]
+[RequestLoggerMiddleware] ~~> [WerkstattResolver]
+
+[WerkstattController] ..> [WerkstattService]
+[WerkstattResolver] ..> [WerkstattService]
+[WerkstattService] ..> [Repository<Werkstatt>]
+
+[Repository<Werkstatt>] ~~> [TypeORM]
+[TypeORM] ~~> [Tabelle werkstatt]
+[TypeORM] ~~> [Tabelle titel]
+[TypeORM] ~~> [Tabelle abbildung]
+
+[WerkstattController] ..> [nest-keycloak-connect]
+[nest-keycloak-connect] ~~> [Keycloak]
+
+footer (c) Jannis Groth
+
+@enduml

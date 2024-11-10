@@ -1,0 +1,41 @@
+@startuml ER Diagramm
+
+hide circle
+skinparam linetype ortho
+
+entity "Werkstatt" {
+  * id: integer <<generated>>
+  --
+  * version: integer
+  * werkstattname: text
+  * rating: number
+  * art: text
+    homepage: text
+  * **adresse_id**: integer <<FK>>
+    schlagwoerter: text
+  * erzeugt: timestamp
+  * aktualisiert: timestamp
+}
+
+entity "Adresse" {
+  * id: integer <<generated>>
+  --
+  * postleitzahl: text
+    strasse: text
+    hausnummer: text
+}
+
+entity "Angestellter" {
+  * id: integer <<generated>>
+  --
+  * beschriftung: text
+    contentType: text
+  * **werkstatt_id**: integer <<FK>>
+}
+
+Werkstatt ||..|| Adresse
+Werkstatt ||..o{ Angestellter
+
+footer (c) Jannis Groth
+
+@enduml

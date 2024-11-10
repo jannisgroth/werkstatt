@@ -1,0 +1,112 @@
+= Projekthandbuch
+Jannis Groth
+:doctype: book
+:toc: left
+:sectanchors:
+:sectlinks:
+:sectnums:
+:source-highlighter: highlight.js
+:icons: font
+
+== Der Applikationsserver
+
+=== Der Applikationsserver im Überblick
+
+Sed porttitor lectus nibh. Nulla porttitor accumsan tincidunt.
+
+.Use Cases
+[plantuml,use-cases,svg]
+----
+include::use-cases.plantuml[]
+----
+
+Quisque velit nisi, pretium ut lacinia in, elementum id enim. Nulla porttitor
+accumsan tincidunt.
+
+.Komponentendiagramm
+[plantuml,komponenten,svg]
+----
+include::komponenten.plantuml[]
+----
+
+=== Die REST-Schnittstelle
+
+Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia
+Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet
+ligula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
+cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit
+amet ligula.
+
+."WerkstattGetController" für Lesezugriffe an der REST-Schnittstelle
+[plantuml,WerkstattGetController,svg]
+----
+include::WerkstattGetController.plantuml[]
+----
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+tempor invidunt ut.
+
+."WerkstattWriteController" für Schreibzugriffe an der REST-Schnittstelle
+[plantuml,WerkstattGetController,svg]
+----
+include::WerkstattWriteController.plantuml[]
+----
+
+=== Die GraphQL-Schnittstelle
+
+Donec sollicitudin molestie malesuada. Donec rutrum congue leo eget malesuada.
+
+.WerkstattQueryResolver für Lesezugriffe an der GraphQL-Schnittstelle
+[plantuml,WerkstattQueryResolver,svg]
+----
+include::WerkstattQueryResolver.plantuml[]
+----
+
+Donec sollicitudin molestie malesuada. Praesent sapien massa, convallis a
+pellentesque nec, egestas non nisi.
+
+.WerkstattMutationResolver für Schreibzugriffe an der GraphQL-Schnittstelle
+[plantuml,WerkstattMutationResolver,svg]
+----
+include::WerkstattMutationResolver.plantuml[]
+----
+
+=== Die Geschäftslogik
+
+Donec rutrum congue leo eget malesuada. Donec rutrum congue leo eget malesuada.
+
+."WerkstattReadService" von der Geschäftslogik
+[plantuml,WerkstattReadService,svg]
+----
+include::WerkstattReadService.plantuml[]
+----
+
+Pellentesque in ipsum id orci porta dapibus. Donec rutrum congue leo eget
+malesuada.
+
+."WerkstattWriteService" von der Geschäftslogik
+[plantuml,WerkstattWriteService,svg]
+----
+include::WerkstattWriteService.plantuml[]
+----
+
+=== Klasse für Entities
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur arcu erat,
+accumsan id imperdiet et, porttitor at sem.
+
+.Entity
+[plantuml,Werkstatt,svg]
+----
+include::Werkstatt.plantuml[]
+----
+
+=== ER-Diagramm
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+.ER-Diagramm
+[plantuml,ER-Diagramm,svg]
+----
+include::ER-Diagramm.plantuml[]
+----

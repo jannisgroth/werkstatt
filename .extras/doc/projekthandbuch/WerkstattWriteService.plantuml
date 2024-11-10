@@ -1,0 +1,65 @@
+@startuml Anwendungskern
+
+interface Promise<T>
+
+package @nestjs/common {
+  class "@Injectable" as Injectable
+  hide Injectable circle
+}
+
+package typeorm {
+  class Repository<T>
+}
+
+package @nestjs/typeorm {
+  class "@InjectRepository" as InjectRepository
+  hide InjectRepository circle
+}
+
+package werkstatt {
+  package entity {
+    class Werkstatt
+  }
+
+  package service #DDDDDD {
+    class WerkstattInvalid
+    class AdresseExists
+    class WerkstattnameExists
+    class VersionInvalid
+    class VersionOutdated
+
+    class WerkstattWriteService << control >> <<@Injectable()>> {
+      + async create(Werkstatt: Werkstatt): Promise<string|WerkstattInvalid|TitelExists|IsbnExists>
+      + async update(id: number, Werkstatt: Werkstatt, version: string): Promise<number|WerkstattInvalid|TitelExists|IsbnExists|VersionInvalid|VersionOutdated>
+      + async delete(id: number): Promise<boolean>
+    }
+
+    WerkstattWriteService o--> "1" WerkstattValidationService: validationService
+    WerkstattWriteService o--> "1" WerkstattReadService: readService
+    WerkstattWriteService o--> "1" Repository: @InjectRepository repo
+
+    WerkstattWriteService .up.> Injectable
+    WerkstattWriteService .up.> InjectRepository
+
+    WerkstattWriteService .up.> Promise
+    WerkstattWriteService ..> Werkstatt
+    WerkstattWriteService .up.> WerkstattInvalid
+    WerkstattWriteService .up.> AdresseExists
+    WerkstattWriteService .up.> WerkstattnameExists
+    WerkstattWriteService .up.> VersionInvalid
+    WerkstattWriteService .up.> VersionOutdated
+
+    WerkstattInvalid .up[hidden].> Werkstatt
+    Werkstatt .up[hidden].> Promise
+    Werkstatt .up[hidden].> Injectable
+    Werkstatt .up[hidden].> InjectRepository
+    TitelExists .up[hidden].> Werkstatt
+    WerkstattValidationService .[hidden].> Repository
+  }
+}
+
+hide empty members
+
+footer (c) Jannis Groth
+
+@enduml

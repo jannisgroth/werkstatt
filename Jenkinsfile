@@ -165,7 +165,7 @@ pipeline {
                     },
                     'AsciiDoctor': {
                         sh 'npx asciidoctor --version'
-                        sh 'npm run asciidoctor'
+                        sh ' '
                     },
                     'reveal.js': {
                         sh 'npx asciidoctor-revealjs --version'

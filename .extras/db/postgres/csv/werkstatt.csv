@@ -1,0 +1,6 @@
+id;version;werkstattname;rating;art;homepage;schlagwoerter;erzeugt;aktualisiert
+1;0;Schreinerei Alpha;5;SCHREINEREI;https://alpha.com;FERTIGBAU;2024-02-01 00:00:00;2024-02-01 00:00:00
+20;0;Elektromeister Beta;4;ELEKTRONIKER;https://beta.com;INSTALLATION;2024-02-02 00:00:00;2024-02-02 00:00:00
+30;0;Strommann Gamma;3;ELEKTRONIKER;https://gamma.com;ROHBAU;2024-02-02 00:00:00;2024-02-02 00:00:00
+40;0;Maler Sigma;5;MALER;https://sigma.com;FERTIGBAU;2024-02-03 00:00:00;2024-02-03 00:00:00
+50;0;Schreiner Phi;1;SCHREINEREI;https://phi.com;ROHBAU;2024-02-04 00:00:00;2024-02-04 00:00:00

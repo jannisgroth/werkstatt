@@ -1,0 +1,114 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+"Funktion um Werkstätte-Daten zu lesen"
+type Query {
+  werkstaette(suchkriterien: SuchkriterienInput): [Werkstatt!]
+
+  werkstatt(id: ID!): Werkstatt
+}
+
+"Funktion zum neu anlegen und aktualisieren oder löschen"
+type Mutation {
+  create(input: WerkstattInput!): CreatePayload
+
+  update(input: WerkstattUpdateInput!): UpdatePayload
+
+  delete(id: ID!): Boolean
+
+  token(username: String!, password: String!): TokenResult
+  refresh(refresh_token: String!): TokenResult
+}
+
+"Daten Adresse"
+type Adresse {
+  postleitzahl: String!
+  strasse: String
+  hausnummer: String
+}
+
+"Daten Angestellter"
+type Angestellter {
+  name: String!
+  position: String
+}
+
+"Daten Werkstatt"
+type Werkstatt {
+  id: Int!
+  version: Int!
+  werkstattname: String!
+  rating: Int
+  art: Art
+  homepage: String
+  schlagwoerter: [String]
+
+  adresse: Adresse!
+}
+
+"Enum für art in Werkstatt"
+enum Art {
+  SCHREINEREI
+  MALEREI
+  ELEKTRONIKER
+}
+
+"Suchkriterien für die Werkstatt"
+input SuchkriterienInput {
+  postleitzahl: String
+  werkstattname: String
+  rating: Int
+  art: Art
+}
+
+"Daten für Adresse einer neuen Werkstatt"
+input AdresseInput {
+  postleitzahl: String!
+  strasse: String
+  hausnummer: String
+}
+
+"Daten für Angestellte einer neuen Werkstatt "
+input AngestellterInput {
+  name: String!
+  position: String
+}
+
+"Daten für eine neue Werkstatt"
+input WerkstattInput {
+  werkstattname: String
+  rating: Int
+  art: Art
+  homepage: String
+  schlagwoerter: [String]
+  adresse: AdresseInput!
+  angestellte: [AngestellterInput!]
+}
+
+type CreatePayload {
+  id: Int
+}
+
+"Daten für die zu ändernde Werkstatt"
+input WerkstattUpdateInput {
+  id: ID
+  version: Int
+  werkstattname: String
+  rating: Int
+  art: Art
+  homepage: String
+  schlagwoerter: [String]
+}
+
+type UpdatePayload {
+  version: Int
+}
+
+type TokenResult {
+  access_token: String!
+  expires_in: Int!
+  refresh_token: String!
+  refresh_expires_in: Int!
+}

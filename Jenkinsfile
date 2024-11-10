@@ -76,7 +76,7 @@ pipeline {
 
                 // https://www.jenkins.io/doc/pipeline/steps/git
                 // "named arguments" statt Funktionsaufruf mit Klammern
-                git url: 'https://github.com/myAccount/myRepo', branch: 'main', poll: true
+                git url: 'https://github.com/jannisgroth/werkstatt', branch: 'main', poll: true
             }
         }
 
@@ -217,9 +217,9 @@ pipeline {
                         }
                     }
                     // https://www.jenkins.io/doc/pipeline/steps/pipeline-utility-steps/#zip-create-zip-file
-                    zip zipFile: 'buch.zip', archive: false, dir: 'dist'
+                    zip zipFile: 'werkstatt.zip', archive: false, dir: 'dist'
                     // jobs/buch/builds/.../archive/buch.zip
-                    archiveArtifacts 'buch.zip'
+                    archiveArtifacts 'werkstatt.zip'
                 }
             }
         }
